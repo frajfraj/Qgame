@@ -22,6 +22,9 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Extended.Graphics">
+      <HintPath>..\..\..\..\.nuget\packages\monogame.extended.content.pipeline\3.8.0\tools\MonoGame.Extended.Graphics.dll</HintPath>
+    </Reference>
     <Reference Include="QGame">
       <HintPath>..\QLibDll\QGame.dll</HintPath>
     </Reference>
