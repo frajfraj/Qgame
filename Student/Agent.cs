@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
+using System.Drawing;
 
 class Agent:BaseAgent {
     [STAThread]
@@ -32,8 +33,9 @@ class Agent:BaseAgent {
         return SökNästaDrag(bräde);
     }
 }
-//enum Typ { Flytta, Horisontell, Vertikal }
-//struct Drag {
-//    public Typ typ;
-//    public Point point;
-//}
+enum Typ { Flytta, Horisontell, Vertikal }
+struct Drag
+{
+    public Typ typ;
+    public Point point;
+}
