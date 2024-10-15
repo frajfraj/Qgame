@@ -39,14 +39,24 @@ class Agent:BaseAgent {
 
             if (motståndare.position.X == väggPosition.X)
             {
-                drag.typ = Typ.Horisontell;
+                if (!bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y])
+                {
+                    drag.typ = Typ.Horisontell;
+                    drag.point = väggPosition;
+                }
+                
             }
             else
             {
-                drag.typ = Typ.Vertikal;
+                if (!bräde.vertikalaVäggar[väggPosition.X, väggPosition.Y])
+                {
+                    drag.typ = Typ.Vertikal;
+                    drag.point = väggPosition;
+                }
+                
             }
 
-            drag.point = väggPosition;
+           
         }
 
         else if (väg.Count > 0)
