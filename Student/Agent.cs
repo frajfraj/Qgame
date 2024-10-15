@@ -39,7 +39,8 @@ class Agent:BaseAgent {
 
             if (motståndare.position.X == väggPosition.X)
             {
-                if (!bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y])
+                if (!bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y] &&
+                !bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y + 1])
                 {
                     drag.typ = Typ.Horisontell;
                     drag.point = väggPosition;
@@ -48,7 +49,8 @@ class Agent:BaseAgent {
             }
             else
             {
-                if (!bräde.vertikalaVäggar[väggPosition.X, väggPosition.Y])
+                if (!bräde.vertikalaVäggar[väggPosition.X, väggPosition.Y] &&
+                !bräde.vertikalaVäggar[väggPosition.X + 1, väggPosition.Y])
                 {
                     drag.typ = Typ.Vertikal;
                     drag.point = väggPosition;
