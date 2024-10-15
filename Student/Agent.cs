@@ -145,9 +145,3 @@ class Agent:BaseAgent {
         return väg;
     }
 }
-//enum Typ { Flytta, Horisontell, Vertikal }
-//struct Drag
-//{
-//    public Typ typ;
-//    public Point point;
-//}
