@@ -17,6 +17,7 @@ class Agent:BaseAgent {
             drag.point = playerPos;
             drag.point.Y++;
         } else if (jag.antalVäggar > 7) {
+
             drag.typ = Typ.Horisontell;
             drag.point = new Point(23-jag.antalVäggar*2, 2);
         } else {
