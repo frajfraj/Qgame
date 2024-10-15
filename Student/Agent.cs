@@ -27,13 +27,29 @@ class Agent:BaseAgent {
 
         for(int i = 0; i < SpelBräde.N; i++)
         {
-            motståndaremål.Add((new Point(i, 8)));
+            motståndaremål.Add((new Point(i, 0)));
         }
 
         List<Point> väg = BFS(bräde, jag.position, möjligamål);
         List<Point> motståndareVäg = BFS(bräde, motståndare.position, motståndaremål);
 
-        if (väg.Count > 0)
+        if (motståndareVäg.Count < väg.Count && motståndareVäg.Count > 1)
+        {
+            Point väggPosition = motståndareVäg[0];
+
+            if (motståndare.position.X == väggPosition.X)
+            {
+                drag.typ = Typ.Horisontell;
+            }
+            else
+            {
+                drag.typ = Typ.Vertikal;
+            }
+
+            drag.point = väggPosition;
+        }
+
+        else if (väg.Count > 0)
         {
             Point nästaSteg = väg[0];
             drag.typ = Typ.Flytta;
@@ -126,6 +142,24 @@ class Agent:BaseAgent {
             else
             {
                 return !bräde.vertikalaVäggar[nästa.X, nästa.Y];
+            }
+        }
+    }
+
+    private void PlaceraVägg(SpelBräde bräde, Point position, bool ärHorisontell)
+    {
+        if (ärHorisontell)
+        {
+            if (!bräde.horisontellaVäggar[position.X, position.Y])
+            {
+                bräde.horisontellaVäggar[position.X, position.Y] = true;
+            }
+        }
+        else
+        {
+            if (!bräde.vertikalaVäggar[position.X, position.Y])
+            {
+                bräde.vertikalaVäggar[position.X, position.Y] = true;
             }
         }
     }
