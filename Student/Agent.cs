@@ -12,7 +12,6 @@ class Agent:BaseAgent {
     public override Drag SökNästaDrag(SpelBräde bräde) {
         //Så ni kan kolla om systemet fungerar!
         Spelare jag = bräde.spelare[0];
-        Spelare motståndare = bräde.spelare[1];
 
         Drag drag = new Drag();
 
@@ -23,45 +22,10 @@ class Agent:BaseAgent {
             möjligamål.Add(new Point(i, 8));
         }
 
-        List<Point> motståndaremål = new List<Point>();
-
-        for(int i = 0; i < SpelBräde.N; i++)
-        {
-            motståndaremål.Add((new Point(i, 0)));
-        }
-
         List<Point> väg = BFS(bräde, jag.position, möjligamål);
-        List<Point> motståndareVäg = BFS(bräde, motståndare.position, motståndaremål);
+       
 
-        if (motståndareVäg.Count < väg.Count && motståndareVäg.Count > 1)
-        {
-            Point väggPosition = motståndareVäg[0];
-
-            if (motståndare.position.X == väggPosition.X)
-            {
-                if (!bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y] &&
-                !bräde.horisontellaVäggar[väggPosition.X, väggPosition.Y + 1])
-                {
-                    drag.typ = Typ.Horisontell;
-                    drag.point = väggPosition;
-                }
-                
-            }
-            else
-            {
-                if (!bräde.vertikalaVäggar[väggPosition.X, väggPosition.Y] &&
-                !bräde.vertikalaVäggar[väggPosition.X + 1, väggPosition.Y])
-                {
-                    drag.typ = Typ.Vertikal;
-                    drag.point = väggPosition;
-                }
-                
-            }
-
-           
-        }
-
-        else if (väg.Count > 0)
+        if (väg.Count > 0)
         {
             Point nästaSteg = väg[0];
             drag.typ = Typ.Flytta;
@@ -154,24 +118,6 @@ class Agent:BaseAgent {
             else
             {
                 return !bräde.vertikalaVäggar[nästa.X, nästa.Y];
-            }
-        }
-    }
-
-    private void PlaceraVägg(SpelBräde bräde, Point position, bool ärHorisontell)
-    {
-        if (ärHorisontell)
-        {
-            if (!bräde.horisontellaVäggar[position.X, position.Y])
-            {
-                bräde.horisontellaVäggar[position.X, position.Y] = true;
-            }
-        }
-        else
-        {
-            if (!bräde.vertikalaVäggar[position.X, position.Y])
-            {
-                bräde.vertikalaVäggar[position.X, position.Y] = true;
             }
         }
     }
